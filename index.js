@@ -9,7 +9,9 @@ app.get('/', (request, response) => {
   response.send('Hello World');
 });
 
-
+app.get('/info', (request, response) => {
+  response.send("{serverName: " + jsonData['name'] + ", serverVersion: " + jsonData['version'] + "}");
+});
 
 app.get('/welcome', (request, response) => {
   response.send('Welcome!');
