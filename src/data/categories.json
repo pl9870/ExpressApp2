@@ -1,0 +1,18 @@
+{
+  "categories": [{
+    "id" : "cty01",
+    "categoryName" : "Fruits"
+    }, {
+       "id": "cty02",
+       "categoryName": "Vegetables"
+    }, {
+       "id": "cty03",
+       "categoryName": "Hats"
+    }, {
+       "id": "cty04",
+       "categoryName": "Cars"
+    }, {
+       "id": "cty05",
+       "categoryName": "Airplanes"
+    }]
+}
