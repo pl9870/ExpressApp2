@@ -5,15 +5,12 @@
   "repository": "https://github.com/pl9870/SecondExpressApp.git",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "pretest": "eslint --ignore-path .gitignore ."
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "^4.16.4",
     "http-errors": "~1.6.3"
-  },
-  "scripts": {
-        "pretest": "eslint --ignore-path .gitignore ."
-    }
+  }
 }
