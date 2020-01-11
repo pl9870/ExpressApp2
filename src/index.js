@@ -1,31 +1,47 @@
-"use strict";
-const express = require('express');
-const app = express();
-let products = require('./data/products.json');
-let categories = require('./data/categories.json');
+let express = require('express');
+let app = express();
+const products = require('./data/products.json');
+const categories = require('./data/categories.json');
+const dataService = require('./dataService.js');
 
-const PORT = 3000;
-
-//combining product.json with categories.json so that categoryId is the actual name of the category
-products.products.map(product => product.categoryName = categories.categories.filter(category => category.id === product.categoryId)[0].categoryName);
+let PORT = 3000;
 
 app.get('/', (request, response) => {
   response.send('Hello World');
 });
 
-//returning all products
+// returning all products
 app.get('/products/all', (request, response) => {
-  response.send(JSON.stringify(products));
+  response.send(JSON.stringify(mapToObj(dataService.getCombinedProductMap())));
 });
 
-//returns products with the specified id
+//helper function because response.send can't send maps
+const mapToObj = map => {
+  return Array.from(map).reduce((obj, [key, value]) => {
+    obj[key] = value;
+    return obj;
+  }, {});
+};
+
+
+// returns products with the specified id
 app.get('/products/:id', (request, response) => {
-  response.send(products.products.filter(product => product.id === request.params.id));
+  for (const [key, value] of dataService.getCombinedProductMap()) {
+    if (key === request.params.id) {
+      response.send(JSON.stringify(value));
+    }
+  }
 });
 
-//returns products with the specificed categoryId
+// returns products with specified category id
 app.get('/category/:ctyId', (request, response) => {
-  response.send(products.products.filter(product => product.categoryId === request.params.ctyId));
+  let tempMap = new Map();
+  for (const [key, value] of dataService.getCombinedProductMap()) {
+    if (value.categoryId === request.params.ctyId) {
+      tempMap.set(key,value);
+    }
+  }
+  response.send(JSON.stringify(mapToObj(tempMap)));
 });
 
 app.listen(PORT, () => {
