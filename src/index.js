@@ -26,11 +26,13 @@ const mapToObj = map => {
 
 // returns products with the specified id
 app.get('/products/:id', (request, response) => {
+  let tMap = new Map();
   for (const [key, value] of dataService.getCombinedProductMap()) {
     if (key === request.params.id) {
-      response.send(JSON.stringify(value));
+      tMap.set(key, value);
     }
   }
+  response.send(JSON.stringify(mapToObj(tMap)));
 });
 
 // returns products with specified category id
