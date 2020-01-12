@@ -5,17 +5,13 @@ let combinedProductMap = new Map();
 // returns a map of elements with product id with product
 function getProducts() {
   const products = require('./data/products.json');
-  if (productMap.size === 0) {
-    products.products.forEach(prod => productMap.set(prod['id'], prod));
-  }
+  if (productMap.size === 0) { products.products.forEach(prod => productMap.set(prod['id'], prod)); }
 }
 
 // returns a map of elements with category id and category
 function getCategories() {
   const categories = require('./data/categories.json');
-  if (categoryMap.size === 0) {
-    categories.categories.forEach(cat => categoryMap.set(cat['id'], cat));
-  }
+  if (categoryMap.size === 0) { categories.categories.forEach(cat => categoryMap.set(cat['id'], cat)); }
 }
 
 // returns a map of elements with product id and category and products combined
