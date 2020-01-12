@@ -29,9 +29,7 @@ function combineProductsWithCategories() {
 }
 
 function getCombinedProductMap() {
-  if (combinedProductMap.size === 0) {
-    combineProductsWithCategories();
-  }
+  if (combinedProductMap.size === 0) { combineProductsWithCategories(); }
   return combinedProductMap;
 }
 
